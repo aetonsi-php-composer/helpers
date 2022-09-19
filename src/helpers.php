@@ -1,17 +1,20 @@
 <?php
 
 if (!function_exists('vd')) {
-    function vd(mixed ...$vars): void
+    function vd()
     {
-        $vars && var_dump(...$vars);
+        $vars = \func_get_args();
+        if ($vars) {
+            foreach ($vars as $var) \var_dump($var);
+        }
         exit;
     }
 }
 
 if (!function_exists('pr')) {
-    function pr(array $var): void
+    function pr($arr): void
     {
-        print_r($var);
+        \print_r($arr);
         exit;
     }
 }
