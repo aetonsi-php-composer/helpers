@@ -12,7 +12,7 @@ if (!function_exists('vd')) {
 }
 
 if (!function_exists('pr')) {
-    function pr($arr): void
+    function pr($arr)
     {
         \print_r($arr);
         exit;
