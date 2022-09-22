@@ -1,7 +1,7 @@
 {
     "name": "aetonsi/helpers",
     "description": "various helpers in global namespace",
-    "version": "0.0.2",
+    "version": "0.1.0",
     "type": "library",
     "require": {
         "php": ">=5"
