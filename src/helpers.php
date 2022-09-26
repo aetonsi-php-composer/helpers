@@ -10,9 +10,10 @@ if (!function_exists('plaintext')) {
 if (!function_exists('vd')) {
     function vd()
     {
-        $vars = \func_get_args();
-        if ($vars) foreach ($vars as $var) \var_dump($var);
         plaintext();
+        $dbbt = \debug_backtrace(\DEBUG_BACKTRACE_IGNORE_ARGS, 1)[0];
+        echo "{ $dbbt[file]:$dbbt[line] }\n";
+        foreach (\func_get_args() as $var) \var_dump($var);
         exit;
     }
 }
@@ -20,8 +21,10 @@ if (!function_exists('vd')) {
 if (!function_exists('pr')) {
     function pr($arr)
     {
-        \print_r($arr);
         plaintext();
+        $dbbt = \debug_backtrace(\DEBUG_BACKTRACE_IGNORE_ARGS, 1)[0];
+        echo "{ $dbbt[file]:$dbbt[line] }\n";
+        \print_r($arr);
         exit;
     }
 }
