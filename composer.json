@@ -1,7 +1,7 @@
 {
     "name": "aetonsi/helpers",
     "description": "various helpers in global namespace",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "type": "library",
     "require": {
         "php": ">=5"
@@ -15,7 +15,7 @@
     ],
     "autoload": {
         "files": [
-            "/src/helpers.php"
+            "src/helpers.php"
         ]
     }
 }
