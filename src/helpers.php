@@ -44,3 +44,29 @@ if (!function_exists('pr')) {
         exit;
     }
 }
+
+
+if (!function_exists('def')) {
+    /**
+     * Returns $var if it's set, else returns $default.
+     * PLEASE NOTE: call this with the \@ operator!
+     * For example: echo @def($_SERVER['test'], 123);
+     */
+    function def($var, $default = null)
+    {
+        return isset($var) ? $var : $default;
+    }
+}
+
+
+if (!function_exists('defne')) {
+    /**
+     * Returns $var if it's set AND not empty, else returns $default.
+     * PLEASE NOTE: call this with the \@ operator!
+     * For example: echo @defne($_SERVER['test'], 123);
+     */
+    function defne($var, $default = null)
+    {
+        return isset($var) && !empty($var) ? $var : $default;
+    }
+}
