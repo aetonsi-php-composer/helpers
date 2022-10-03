@@ -1,6 +1,17 @@
 <?php
 
 
+if (!function_exists('jsonapplication')) {
+    /**
+     * Sets the content type to json application.
+     */
+    function jsonapplication()
+    {
+        \header('Content-Type: application/json; charset=UTF-8');
+    }
+}
+
+
 if (!function_exists('plaintext')) {
     /**
      * Sets the content type to plain text.
@@ -8,6 +19,38 @@ if (!function_exists('plaintext')) {
     function plaintext()
     {
         \header('Content-Type: text/plain; charset=UTF-8');
+    }
+}
+
+
+if (!function_exists('je')) {
+    /**
+     * json_encodes $data, and returns it if $return===true, else it prints it.
+     *
+     * @param mixed $data
+     * @return string|false|never
+     */
+    function je($data, $return = false)
+    {
+        $result = @\json_encode($data, \JSON_UNESCAPED_UNICODE);
+        if (!$return) {
+            @jsonapplication();
+            echo defne($result, ''); // if $result is false, print nothing
+            exit;
+        } else {
+            return $result;
+        }
+    }
+}
+
+
+if (!function_exists('trace')) {
+    /**
+     * Prints or returns ($return===true) a json_encoded representation of the stack trace (and terminates the program if $return===false).
+     */
+    function trace($ignoreArgs = false, $limit = 0)
+    {
+        je(\debug_backtrace(($ignoreArgs ? \DEBUG_BACKTRACE_IGNORE_ARGS : 0), $limit));
     }
 }
 
@@ -49,7 +92,7 @@ if (!function_exists('pr')) {
 if (!function_exists('def')) {
     /**
      * Returns $var if it's set, else returns $default.
-     * PLEASE NOTE: call this with the \@ operator!
+     * PLEASE NOTE: call this with the \@ operator for array keys/object vars that might not exist!
      * For example: echo @def($_SERVER['test'], 123);
      */
     function def($var, $default = null)
@@ -62,7 +105,7 @@ if (!function_exists('def')) {
 if (!function_exists('defne')) {
     /**
      * Returns $var if it's set AND not empty, else returns $default.
-     * PLEASE NOTE: call this with the \@ operator!
+     * PLEASE NOTE: call this with the \@ operator for array keys/object vars that might not exist!
      * For example: echo @defne($_SERVER['test'], 123);
      */
     function defne($var, $default = null)
