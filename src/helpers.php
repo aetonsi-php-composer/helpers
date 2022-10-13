@@ -89,15 +89,17 @@ if (!function_exists('pr')) {
 }
 
 
-if (!function_exists('def')) {
+if (!function_exists('isempty')) {
     /**
-     * Returns $var if it's set, else returns $default.
-     * PLEASE NOTE: call this with the \@ operator for array keys/object vars that might not exist!
-     * For example: echo @def($_SERVER['test'], 123);
+     * Custom "empty()" alternative. Returns true for empty strings, empty arrays, null.
+     *
+     * @see https://www.php.net/manual/en/function.empty.php
+     * @see https://www.php.net/manual/en/function.in-array
      */
-    function def($var, $default = null)
+    function isempty($thing)
     {
-        return isset($var) ? $var : $default;
+        $emptyThings = ['', [], null];
+        return \in_array($thing, $emptyThings, true);
     }
 }
 
@@ -107,9 +109,11 @@ if (!function_exists('defne')) {
      * Returns $var if it's set AND not empty, else returns $default.
      * PLEASE NOTE: call this with the \@ operator for array keys/object vars that might not exist!
      * For example: echo @defne($_SERVER['test'], 123);
+     *
+     * @see isempty()
      */
     function defne($var, $default = null)
     {
-        return isset($var) && !empty($var) ? $var : $default;
+        return !isempty($var) ? $var : $default;
     }
 }
